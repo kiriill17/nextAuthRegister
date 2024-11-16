@@ -1,16 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { useState } from 'react';
+
 import { quizArr } from '@/components/quizArr';
 import { Button } from '@/components/ui/button';
-import { prisma } from '@/prisma/prisma-client';
-import { useSession } from 'next-auth/react';
-import { useToast } from '@/hooks/use-toast';
 
 export default function Quiz() {
-  const { toast } = useToast();
-  const { data: session } = useSession();
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const [answers, setAnswers] = React.useState<string[]>([]);
   const [showResults, setShowResults] = React.useState(false);
