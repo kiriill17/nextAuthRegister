@@ -39,7 +39,7 @@ export default function Home() {
       ) : (
         <div className=" flex items-center justify-center h-screen w-screen flex-col">
           <div className="border-2 pt-8 pb-8 pr-8 pl-8 rounded-xl drop-shadow flex flex-col items-center justify-center">
-            <img width={70} src={session.user?.image} alt="" />
+            <img width={70} src={session.user?.image ?? ''} alt="" />
             <h1 className="mt-4 mb-2 text-3xl font-bold">{session.user?.name}</h1>
             <p className="mb-4">{session.user?.email}</p>
             <div className="flex w-full justify-between">
