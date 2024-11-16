@@ -71,54 +71,6 @@ const handler = NextAuth({
     signIn: '/signin',
   },
   secret: process.env.NEXTAUTH_SECRET,
-  callbacks: {
-    async signIn({ user, account }) {
-      try {
-        if (account?.provider === 'credentials') {
-          return true;
-        }
-
-        if (!user?.email) {
-          return false;
-        }
-
-        const findUser = await prisma.user.findFirst({
-          where: {
-            OR: [
-              { provider: account?.provider, providerId: account?.providerAccountId },
-              { mail: user.email },
-            ],
-          },
-        });
-
-        if (findUser) {
-          await prisma.user.update({
-            where: {
-              id: findUser.id,
-            },
-            data: {
-              provider: account?.provider,
-              providerId: account?.providerAccountId,
-            },
-          });
-          return true;
-        }
-        await prisma.user.create({
-          data: {
-            name: user.name !== null && user.name !== undefined ? user.name : '',
-            mail: user.email,
-            provider: account?.provider,
-            providerId: account?.providerAccountId,
-          },
-        });
-        return true;
-      } catch (error) {
-        console.log(error);
-      } finally {
-        return true; // or return a string value
-      }
-    },
-  },
 });
 
 export { handler as GET, handler as POST };
