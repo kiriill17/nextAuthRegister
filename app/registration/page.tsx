@@ -2,15 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { FormEventHandler, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { IoIosArrowBack } from 'react-icons/io';
-import { prisma } from '@/prisma/prisma-client';
 
 export default function SignUp() {
-  const session = useSession();
   const router = useRouter();
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -66,6 +63,7 @@ export default function SignUp() {
         title: 'Ошибка',
         description: 'Не удалось создать аккаунт',
       });
+      console.log(error);
     }
   };
 

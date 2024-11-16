@@ -11,7 +11,7 @@ export default function Home() {
     <>
       {!session ? (
         <div className="flex flex-col items-center justify-center h-screen w-screen">
-          <h1 className="text-3xl">Чтобы пользоваться севрисом, войдите в аккаунт</h1>
+          <h1 className="text-center text-3xl">Чтобы пользоваться севрисом, войдите в аккаунт</h1>
           <div className="flex w-100 gap-4 mt-4 mb-6">
             <a href="/api/auth/signin">
               <Button>Войти</Button>
@@ -42,7 +42,12 @@ export default function Home() {
             <img width={70} src={session.user?.image} alt="" />
             <h1 className="mt-4 mb-2 text-3xl font-bold">{session.user?.name}</h1>
             <p className="mb-4">{session.user?.email}</p>
-            <Button onClick={() => signOut()}>Выйти</Button>
+            <div className="flex w-full justify-between">
+              <Button onClick={() => signOut()}>Выйти</Button>
+              <a href="/quiz">
+                <Button>Пройти квиз</Button>
+              </a>
+            </div>
           </div>
         </div>
       )}
